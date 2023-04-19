@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Research on path planning problem of smart car considering kinematic constraints | Zhanhong Liu&#39;s Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Research on path planning problem of smart car considering kinematic constraints Liu Zhanhong  YK Pao Middle School  Shanghai, China, elowoo_d@outlook.com   Abstract : With the development of artifici">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Research on path planning problem of smart car considering kinematic constraints">
+<meta property="og:url" content="http://example.com/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/index.html">
+<meta property="og:site_name" content="Zhanhong Liu&#39;s Blog">
+<meta property="og:description" content="Research on path planning problem of smart car considering kinematic constraints Liu Zhanhong  YK Pao Middle School  Shanghai, China, elowoo_d@outlook.com   Abstract : With the development of artifici">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure1.png">
+<meta property="og:image" content="http://example.com/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure2.png">
+<meta property="og:image" content="http://example.com/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure3.png">
+<meta property="og:image" content="http://example.com/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure4.png">
+<meta property="og:image" content="http://example.com/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure5.png">
+<meta property="og:image" content="http://example.com/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure6.png">
+<meta property="og:image" content="http://example.com/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure7.png">
+<meta property="og:image" content="http://example.com/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure8.png">
+<meta property="og:image" content="http://example.com/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure9.png">
+<meta property="article:published_time" content="2023-04-07T07:22:56.000Z">
+<meta property="article:modified_time" content="2023-04-07T09:43:32.927Z">
+<meta property="article:author" content="Zhanhong Liu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Zhanhong Liu&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">Zhanhong Liu</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/" class="article-date">
+  	<time datetime="2023-04-07T07:22:56.000Z" itemprop="datePublished">2023-04-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Research on path planning problem of smart car considering kinematic constraints
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints"><a href="#Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints" class="headerlink" title="Research on path planning problem of smart car considering kinematic constraints"></a><center>Research on path planning problem of smart car considering kinematic constraints</center></h1><p><br></p>
+<center><b>Liu Zhanhong</b></center>
+
+<center><b>YK Pao Middle School</b></center>
+
+<center><b>Shanghai, China, elowoo_d@outlook.com</b></center>
+
+<p><br></p>
+<p><strong>Abstract</strong> : With the development of artificial intelligence, intelligent cars have gradually appeared in people’s lives and brought many conveniences to people’s lives and work. On the street, we can see many busy figures of unmanned delivery cars; In some factories, smart cars shuttle back and forth between product production processes for material distribution; In some hospitals, we can also find that some smart cars replace medical staff to undertake the task of sending medicines and tests. For intelligent cars, autonomous collision-free path planning and trajectory tracking of the planned path are the most basic and core tasks of intelligent vehicles. The existing path planning algorithms are mainly divided into search-based algorithms (Dijkstra, A<em>, etc.) and sample-based algorithms (PRM, RRT, etc.), and different types of algorithms have good performance in their respective applicable scenarios. However, these path planning algorithms all use the same simplification assumption, that is, the intelligent car is regarded as a freely moving point or sphere in the path planning task, and the driving experience in life tells us that the movement of the wheel-driven intelligent car is constrained by the turning radius of the vehicle, so the path planned by the simplified intelligent car for a point is often not suitable for the driving of the intelligent car in reality. Considering this constraint, this project models the kinematics of the intelligent trolley with four-wheel steering, and adds kinematic constraints to the path planning, so as to plan the path that conforms to the kinematics model of the intelligent trolley. The path planning algorithm proposed in this topic will be tested in ROS and Gazebo simulation environments, and compared with the traditional search-based A</em> algorithm, the results of multiple scenarios verify the effectiveness of the algorithm. Finally, this project summarizes and looks forward to this research, which has completed the construction of low-cost physical intelligent vehicles, and plans to complete the verification of the real vehicle function by combining the designed path planning algorithm with the real-time mapping and positioning system of the car in the future.</p>
+<p><br></p>
+<p><strong>Keywords</strong>： Intelligent trolley, Path planning, Kinematic constraints</p>
+<p><br><br></p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h2><p>The intelligent car is an unmanned car equipped with sensors that can perceive the environment, interact with the environment, plan sports independently, avoid collisions and avoid obstacles. Due to its high degree of intelligence, intelligent cars can bring many conveniences to people’s lives. At the moment of the epidemic, human transportation is extremely tight, and many takeaway delivery and express logistics staff are sick and unable to quickly deliver the required items to families and companies in need. In this environment, smart cars have great use, such as Meituan’s unmanned delivery car (see Figure 1(a)), which can quickly find the optimal delivery route according to the present map and real-time road conditions, and give the required items to those people. In addition, such trolleys can be mass-produced and do not require a break, which can continue to serve couriers. The popularity of smart cars can also reduce the number of people-to-person encounters, thus reducing the risk of virus transmission. Smart cars can also replace human patrols in cities and replace police patrols with video recordings (see Figure 1(b)), providing more evidence to maintain social order and punish those who break the law. In addition to being popularized and applied in cities, smart cars can also be applied to rural agriculture after receiving certain mechanical transformation (see Figure 1(c) Plant Protection Agricultural Machinery). During the rice harvest season, farmers must harvest the rice before the rainy day, but they also need plenty of rest and no outside influence that causes farmers to stop working. In this way, farmers will not only be overworked, but the efficiency of rice harvesting will also be low. But with the help of smart cars, the work that would have taken several days can be done by robots in a day, saving a lot of manpower and time. In the industrial sector, people still rely heavily on mineral resources such as coal and oil, but there are also certain dangers in mining such mines. A sudden collapse can lead to many unimaginable consequences, but with the help of unmanned exploration vehicles (see Figure 1(d)), the structure and shape of the mine cave can be detected in advance, and the mining plan can be set in advance, reducing the risk of surveyors being killed.</p>
+<img src="/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure1.png" class="">
+<center>Figure 1. A series of applications of intelligent trolleys: (a) Meituan unmanned delivery trolley, (b) unmanned patrol police vehicle, (c) unmanned agricultural machinery, (d) unmanned detection mining vehicle.</center>
+
+<p><br></p>
+<p>Path planning is one of the contents of robot motion planning. Motion planning consists of path planning and trajectory planning. The curve that connects the start and end points of the robot in the environment is called the path, and the strategy of finding the path is called path planning. Path planning has many uses in life, such as vehicle route planning based on GPS navigation system <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.877ex" height="2.021ex" role="img" focusable="false" viewBox="0 -893.3 829.7 893.3"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"></g><g data-mml-node="TeXAtom" transform="translate(33,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mn" transform="translate(278,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(778,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></g></g></svg></mjx-container>, express logistics distribution route planning <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.877ex" height="2.021ex" role="img" focusable="false" viewBox="0 -893.3 829.7 893.3"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"></g><g data-mml-node="TeXAtom" transform="translate(33,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mn" transform="translate(278,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mo" transform="translate(778,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></g></g></svg></mjx-container>, and sweeping robot route planning <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.877ex" height="2.021ex" role="img" focusable="false" viewBox="0 -893.3 829.7 893.3"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"></g><g data-mml-node="TeXAtom" transform="translate(33,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mn" transform="translate(278,0)"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path></g><g data-mml-node="mo" transform="translate(778,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></g></g></svg></mjx-container>. The general steps of path planning are as follows: First, according to the sensor data (lidar or camera, etc.) that can perceive the environment, a model of the environment around the robot is made, and at the same time, the environment model is rasterized to facilitate the robot to carry out path planning tasks. Second, the optimal collision-free path is searched by a specified algorithm in the map of the modelling environment. Third, with the help of the controller, the trolley can follow the path planned by the algorithm as much as possible, and if there is a situation where it cannot follow or the movement obstacle interferes, the path is replanned.</p>
+<p>Depending on the planning strategy, path planning algorithms can be divided into two broad categories: search-based methods and sampling-based methods. Search-based methods include graph search methods <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.877ex" height="2.021ex" role="img" focusable="false" viewBox="0 -893.3 829.7 893.3"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"></g><g data-mml-node="TeXAtom" transform="translate(33,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mn" transform="translate(278,0)"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path></g><g data-mml-node="mo" transform="translate(778,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></g></g></svg></mjx-container>, Dijkstra <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.877ex" height="2.021ex" role="img" focusable="false" viewBox="0 -893.3 829.7 893.3"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"></g><g data-mml-node="TeXAtom" transform="translate(33,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mn" transform="translate(278,0)"><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path></g><g data-mml-node="mo" transform="translate(778,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></g></g></svg></mjx-container>, and A<em> <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.877ex" height="2.021ex" role="img" focusable="false" viewBox="0 -893.3 829.7 893.3"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"></g><g data-mml-node="TeXAtom" transform="translate(33,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mn" transform="translate(278,0)"><path data-c="36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z"></path></g><g data-mml-node="mo" transform="translate(778,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></g></g></svg></mjx-container> algorithms. The most commonly used in graph search are breadth-first search, depth-first search, and heuristic search (greedy algorithm). These kinds of graph search algorithms have obvious defects, breadth-first search and depth-first search often need to visit a large number of nodes to search for the target point, heuristic search can search for the target point faster, but at the same time, there is a greater probability of falling into the local optimal value, resulting in the inability to search the global optimal path. Dijkstra and A</em> algorithms combine breadth-first search and heuristic search to jointly consider, under the premise of ensuring that the optimal path is searched, the efficiency of search is improved, but the path planned by Dijkstra and A* algorithm has quite a lot of corners, the corners are generally polylines, the path is not smooth, resulting in the robot turning at the inflection point is difficult, resulting in the robot tracking the path when tracking the difficult tracking, easy to collide at the corner. Sampling-based methods include probabilistic road map (PRM) <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.877ex" height="2.021ex" role="img" focusable="false" viewBox="0 -893.3 829.7 893.3"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"></g><g data-mml-node="TeXAtom" transform="translate(33,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mn" transform="translate(278,0)"><path data-c="37" d="M55 458Q56 460 72 567L88 674Q88 676 108 676H128V672Q128 662 143 655T195 646T364 644H485V605L417 512Q408 500 387 472T360 435T339 403T319 367T305 330T292 284T284 230T278 162T275 80Q275 66 275 52T274 28V19Q270 2 255 -10T221 -22Q210 -22 200 -19T179 0T168 40Q168 198 265 368Q285 400 349 489L395 552H302Q128 552 119 546Q113 543 108 522T98 479L95 458V455H55V458Z"></path></g><g data-mml-node="mo" transform="translate(778,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></g></g></svg></mjx-container> and fast random tree (RRT) <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.877ex" height="2.021ex" role="img" focusable="false" viewBox="0 -893.3 829.7 893.3"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"></g><g data-mml-node="TeXAtom" transform="translate(33,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mn" transform="translate(278,0)"><path data-c="38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"></path></g><g data-mml-node="mo" transform="translate(778,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></g></g></svg></mjx-container> algorithms; The PRM algorithm transforms the continuous space into a discrete space by adoption, and uses the graph search method to search for paths in the discrete space to improve efficiency. Although in small scenes, a relatively small number of sample points can cover most of the feasible space, when there are too few sample points or the sample points are not evenly distributed, the PRM algorithm will not be able to get a feasible path. Compared with the PRM algorithm, the RRT algorithm is simpler and more versatile, the search process of the RRT algorithm is equivalent to a tree growing continuously from the beginning and spreading around, until the tree spreads to the end, because the RRT algorithm adopts a completely random process, the final path obtained is not optimal, and even very twisted and winding. The methods summarized above each have certain defects, and the methods have a basic assumption: “treat the car as a point and move freely in any direction”, and most of the intelligent cars in life use wheeled steering geometric models.</p>
+<p>In order to solve the technical problems of these path planning algorithms, this study will propose to improve the A<em> algorithm, after adding kinematic constraints, the improved A</em> algorithm avoids the shortcomings of the traditional A<em> algorithm with large turning angle and planning path close to obstacles, while retaining the advantages of high search efficiency and planning success rate of A</em> algorithm. In addition, the size of the robot itself is usually not considered in the trajectory search, so there is a chance that the planned route will not collide but the collision will occur in the actual situation due to the robot volume, so the improved A<em> algorithm also introduces the function of obstacle expansion, so that the safety of path planning is guaranteed.<br>The remainder of the article is as follows: the second part introduces the software framework, system platform, and implementation details of the improved A</em> algorithm for this study; The third part introduces the simulation environment and experiments for testing and improving the A* algorithm, and analyses the experimental results. Part IV summarizes the entire topic and provides an overview of ongoing research for future extensions.</p>
+<p>The remainder of the article is as follows: the second part introduces the software framework, system platform, and implementation details of the improved A<em> algorithm for this study; The third part introduces the simulation environment and experiments for testing and improving the A</em> algorithm, and analyses the experimental results. Part IV summarizes the entire topic and provides an overview of ongoing research for future extensions.</p>
+<h2 id="2-Methods"><a href="#2-Methods" class="headerlink" title="2.Methods"></a>2.Methods</h2><h3 id="2-1-Formatting-the-title"><a href="#2-1-Formatting-the-title" class="headerlink" title="2.1.Formatting the title"></a>2.1.Formatting the title</h3><p>In this project, a robot operating system (ROS) is used. With the rapid development and complexity of the field of robotics, the need for code reuse and modularization is becoming increasingly strong, and the existing open source system can no longer adapt well to the needs, and in 2010, Willow Garage released the open source robot operating system ROS <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.877ex" height="2.021ex" role="img" focusable="false" viewBox="0 -893.3 829.7 893.3"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"></g><g data-mml-node="TeXAtom" transform="translate(33,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mn" transform="translate(278,0)"><path data-c="39" d="M352 287Q304 211 232 211Q154 211 104 270T44 396Q42 412 42 436V444Q42 537 111 606Q171 666 243 666Q245 666 249 666T257 665H261Q273 665 286 663T323 651T370 619T413 560Q456 472 456 334Q456 194 396 97Q361 41 312 10T208 -22Q147 -22 108 7T68 93T121 149Q143 149 158 135T173 96Q173 78 164 65T148 49T135 44L131 43Q131 41 138 37T164 27T206 22H212Q272 22 313 86Q352 142 352 280V287ZM244 248Q292 248 321 297T351 430Q351 508 343 542Q341 552 337 562T323 588T293 615T246 625Q208 625 181 598Q160 576 154 546T147 441Q147 358 152 329T172 282Q197 248 244 248Z"></path></g><g data-mml-node="mo" transform="translate(778,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></g></g></svg></mjx-container>. ROS provides the services engineers expect from an operating system, including hardware abstraction, low-level device control, implementation of common functions, messaging between processes, and package management. It also provides tools and libraries to get, build, write, and run code on multiple computers. At the same time, ROS supports a variety of programming languages. It is easy to communicate between Python and C++ nodes, and C++ programming is mainly used in this topic. ROS is a framework for robot programming that couples otherwise loose components together and provides them with a communication architecture in which ROS nodes are connected to the different modules used by the robot and transferred data to and from the rest of the nodes through subscription-publish and client-service frameworks. ROS topics are one-way communication mechanisms, when an ROS node is a publisher, it usually converts data into message data and publishes it to a topic, while other nodes need to subscribe to the topic if they want to get the message packet. ROS’s service is a synchronous two-way communication mechanism, the server only responds when there is a request, the client accepts the response after the request is made, and when the service request and response are completed, the two connection points are automatically disconnected. The communication method of ROS action is similar to that of the service, except that it takes a long time for the server to complete the response after receiving the request, and it needs to feedback the current completion to the client and report the current status in the middle. This article summarizes the communication mechanism of ROS in Figure 2. Although ROS is called an operating system, it is not an operating system in the usual sense of Windows and Mac, it is only connected to the operating system and the ROS application developed by the user, so it is also a middleware, ROS-based applications have established a bridge of communication, on the ROS platform, the robot perception, decision-making, control algorithms can be better organized and run. In addition, the ROS platform is highly compatible with the Gazebo simulation platform <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.677ex" height="2.021ex" role="img" focusable="false" viewBox="0 -893.3 1183.3 893.3"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"></g><g data-mml-node="TeXAtom" transform="translate(33,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mn" transform="translate(278,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(1278,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></g></g></svg></mjx-container> mentioned below, and based on these advantages, most robotics algorithm research and development will use the ROS platform.</p>
+<img src="/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure2.png" class="">
+<center>Figure 2. Schematic of the communication mechanism of ROS.</center>
+
+<p><br></p>
+<h3 id="2-2-Traditional-A-algorithm"><a href="#2-2-Traditional-A-algorithm" class="headerlink" title="2.2.Traditional A* algorithm"></a>2.2.Traditional A* algorithm</h3><p>The A<em> algorithm is a very common path finding and graph traversal algorithm, and because it is guided by heuristics, the A</em> algorithm generally has better performance than ordinary search algorithms. Heuristic exploration is to use the heuristic information (such as the distance from the end point) to guide the search, so as to reduce the scope of exploration and reduce the complexity of the problem. The general idea of the A* algorithm is: starting from the starting point node, traversing the search for neighbouring points around the starting point (usually eight nodes around the current node, see Figure 3) through the heuristic function, and selecting the best advantage as the next expansion point, and then performing the same heuristic search traversal operation on the next expansion point, gradually spreading outward until the end point is found, and finally returning to the starting point from the end node to obtain the final path.</p>
+<p>The core formula of the A* algorithm is its heuristic function:</p>
+<script type="math/tex; mode=display">
+  F(n)=G(n)+H(n)  \qquad  (1)</script><p>where <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.812ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2127 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D439" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"></path></g><g data-mml-node="mo" transform="translate(749,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1138,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1738,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>  is the estimated cost of moving from the start to the end of the current node <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.357ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 600 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container> ;  <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="5.127ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2266 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D43B" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 219 683Q260 681 355 681Q389 681 418 681T463 682T483 682Q499 682 499 672Q499 670 497 658Q492 641 487 638H485Q483 638 480 638T473 638T464 637T455 637Q416 636 405 634T387 623Q384 619 355 500Q348 474 340 442T328 395L324 380Q324 378 469 378H614L615 381Q615 384 646 504Q674 619 674 627T617 637Q594 637 587 639T580 648Q580 650 582 660Q586 677 588 679T604 682Q609 682 646 681T740 680Q802 680 835 681T871 682Q888 682 888 672Q888 645 876 638H874Q872 638 869 638T862 638T853 637T844 637Q805 636 794 634T776 623Q773 618 704 340T634 58Q634 51 638 51Q646 48 692 46H723Q729 38 729 37T726 19Q722 6 716 0H701Q664 2 567 2Q533 2 504 2T458 2T437 1Q420 1 420 10Q420 15 423 24Q428 43 433 45Q437 46 448 46H454Q481 46 514 49Q520 50 522 50T528 55T534 64T540 82T547 110T558 153Q565 181 569 198Q602 330 602 331T457 332H312L279 197Q245 63 245 58Q245 51 253 49T303 46H334Q340 38 340 37T337 19Q333 6 327 0H312Q275 2 178 2Q144 2 115 2T69 2T48 1Q31 1 31 10Q31 12 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mo" transform="translate(888,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1277,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1877,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container> represents the cost of moving from the origin to the current node ;  represents the estimated cost of moving from the current node   <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.357ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 600 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container>  to the end point. The <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.05ex;" xmlns="http://www.w3.org/2000/svg" width="1.778ex" height="1.645ex" role="img" focusable="false" viewBox="0 -705 786 727"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D43A" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q492 659 471 656T418 643T357 615T294 567T236 496T189 394T158 260Q156 242 156 221Q156 173 170 136T206 79T256 45T308 28T353 24Q407 24 452 47T514 106Q517 114 529 161T541 214Q541 222 528 224T468 227H431Q425 233 425 235T427 254Q431 267 437 273H454Q494 271 594 271Q634 271 659 271T695 272T707 272Q721 272 721 263Q721 261 719 249Q714 230 709 228Q706 227 694 227Q674 227 653 224Q646 221 643 215T629 164Q620 131 614 108Q589 6 586 3Q584 1 581 1Q571 1 553 21T530 52Q530 53 528 52T522 47Q448 -22 322 -22Q201 -22 126 55T50 252Z"></path></g></g></g></svg></mjx-container>-value of the child node is the -value of the parent node plus the cost of moving the parent node to the current node. The <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.009ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 888 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D43B" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 219 683Q260 681 355 681Q389 681 418 681T463 682T483 682Q499 682 499 672Q499 670 497 658Q492 641 487 638H485Q483 638 480 638T473 638T464 637T455 637Q416 636 405 634T387 623Q384 619 355 500Q348 474 340 442T328 395L324 380Q324 378 469 378H614L615 381Q615 384 646 504Q674 619 674 627T617 637Q594 637 587 639T580 648Q580 650 582 660Q586 677 588 679T604 682Q609 682 646 681T740 680Q802 680 835 681T871 682Q888 682 888 672Q888 645 876 638H874Q872 638 869 638T862 638T853 637T844 637Q805 636 794 634T776 623Q773 618 704 340T634 58Q634 51 638 51Q646 48 692 46H723Q729 38 729 37T726 19Q722 6 716 0H701Q664 2 567 2Q533 2 504 2T458 2T437 1Q420 1 420 10Q420 15 423 24Q428 43 433 45Q437 46 448 46H454Q481 46 514 49Q520 50 522 50T528 55T534 64T540 82T547 110T558 153Q565 181 569 198Q602 330 602 331T457 332H312L279 197Q245 63 245 58Q245 51 253 49T303 46H334Q340 38 340 37T337 19Q333 6 327 0H312Q275 2 178 2Q144 2 115 2T69 2T48 1Q31 1 31 10Q31 12 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g></g></g></svg></mjx-container>  value is typically calculated from the distance from Manhattan <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.677ex" height="2.021ex" role="img" focusable="false" viewBox="0 -893.3 1183.3 893.3"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"></g><g data-mml-node="TeXAtom" transform="translate(33,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mn" transform="translate(278,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(1278,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></g></g></svg></mjx-container> from the current node <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.357ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 600 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container> to the end point. Manhattan Distance (MD), also known as taxi distance, is used to calculate the sum of the absolute axis distances of two points in a standard coordinate system. The distance of Manhattan between a point (<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.339ex;" xmlns="http://www.w3.org/2000/svg" width="2.282ex" height="1.339ex" role="img" focusable="false" viewBox="0 -442 1008.6 592"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mn" transform="translate(605,-150) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container>,<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.464ex;" xmlns="http://www.w3.org/2000/svg" width="2.096ex" height="1.464ex" role="img" focusable="false" viewBox="0 -442 926.6 647"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mn" transform="translate(523,-150) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container>) and a point (<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.339ex;" xmlns="http://www.w3.org/2000/svg" width="2.282ex" height="1.339ex" role="img" focusable="false" viewBox="0 -442 1008.6 592"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mn" transform="translate(605,-150) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g></g></svg></mjx-container>,<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.464ex;" xmlns="http://www.w3.org/2000/svg" width="2.096ex" height="1.464ex" role="img" focusable="false" viewBox="0 -442 926.6 647"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mn" transform="translate(523,-150) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g></g></svg></mjx-container>) in two-dimensional space is defined as follows:</p>
+<script type="math/tex; mode=display">
+d=|x_1-x_2|+|y_1-y_2| \qquad (2)</script><p>The A<em> algorithm usually uses two linked lists to record the nodes to be traversed and the nodes that have been traversed, which are called open linked lists and closed linked lists, respectively. The full A</em> algorithm description is described as Algorithm 1.</p>
+<img src="/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure3.png" class="">
+<center>Figure 3. A* algorithm extends the node graph.</center>
+
+<p><br></p>
+<h3 id="2-3-Improved-A-algorithm-that-considers-kinematic-constraints"><a href="#2-3-Improved-A-algorithm-that-considers-kinematic-constraints" class="headerlink" title="2.3.Improved A* algorithm that considers kinematic constraints"></a>2.3.Improved A* algorithm that considers kinematic constraints</h3><h4 id="2-3-1-Kinematic-constraints-of-wheeled-mobile-robots"><a href="#2-3-1-Kinematic-constraints-of-wheeled-mobile-robots" class="headerlink" title="2.3.1 Kinematic constraints of wheeled mobile robots"></a>2.3.1 Kinematic constraints of wheeled mobile robots</h4><p>Assuming that the basic configuration space of the robot is , in the traditional A* algorithm, only the  and  states of the robot are considered, and there is no constraint on the speed of the robot ; However, the experience of car driving tells us that in the actual driving process of the four-wheel mobile robot, the vehicle cannot directly translate to the left or right, that is, the speed perpendicular to the front of the vehicle is 0. Using Figure 4 as an example, assuming that the vehicle’s velocity perpendicular to the front of the vehicle is , the following constraints apply:</p>
+<img src="/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure4.png" class="">
+<center>Figure 4. Schematic diagram of kinematic constraints of a four-wheeled steering mobile robot.</center>
+
+<p><br></p>
+<script type="math/tex; mode=display">v_\perp = \frac{\dot{x}}{\cos(\theta -\frac{\pi}{2})} \qquad (3)\\
+v_\perp = -\frac{\dot{y}}{\sin(\theta -\frac{\pi}{2})} \qquad (4)</script><p>Simultaneous (3) and (4) yield:</p>
+<script type="math/tex; mode=display">
+\frac{\dot(x)}{\cos(\theta - \frac{\pi}{2})}= -\frac{\dot{y}}{\sin(\theta -\frac{\pi}{2})} \qquad (5)\\
+
+\dot(x)\sin(\theta -\frac{\pi}{2})+\dot{y}\cos(\theta -\frac{\pi}{2})=0 \qquad (6)</script><p>Finally,the kinematic constraints of the four-wheeled mobile robot are:</p>
+<script type="math/tex; mode=display">\dot(x)\cos(\theta) -\dot(y)\sin(\theta) = 0 \qquad (7)</script><h4 id="2-3-2-Improved-A-algorithm"><a href="#2-3-2-Improved-A-algorithm" class="headerlink" title="2.3.2 Improved A* algorithm"></a>2.3.2 Improved A* algorithm</h4><p>In practice, the trajectory of the robot is smooth, while the A<em> algorithm is discrete when expanding nodes, and some nodes that do not meet the kinematic constraints of wheeled robots are also taken into account when searching for nodes, so that the resulting path is usually said to be unexecutable because the direction change of the vehicle is sudden rather than smooth. To solve this problem, this topic will improve the traditional A</em> algorithm.</p>
+<p>First, consider the kinematic constraints introduced in 2.3.1 when searching for surrounding nodes. The search space of the improved A<em> algorithm not only considers the search in the  <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.294ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 572 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g></svg></mjx-container> and <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.464ex;" xmlns="http://www.w3.org/2000/svg" width="1.109ex" height="1.464ex" role="img" focusable="false" viewBox="0 -442 490 647"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container> directions, but also considers the search element in the <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.023ex;" xmlns="http://www.w3.org/2000/svg" width="1.061ex" height="1.618ex" role="img" focusable="false" viewBox="0 -705 469 715"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D703" d="M35 200Q35 302 74 415T180 610T319 704Q320 704 327 704T339 705Q393 701 423 656Q462 596 462 495Q462 380 417 261T302 66T168 -10H161Q125 -10 99 10T60 63T41 130T35 200ZM383 566Q383 668 330 668Q294 668 260 623T204 521T170 421T157 371Q206 370 254 370L351 371Q352 372 359 404T375 484T383 566ZM113 132Q113 26 166 26Q181 26 198 36T239 74T287 161T335 307L340 324H145Q145 321 136 286T120 208T113 132Z"></path></g></g></g></svg></mjx-container> direction, we adopt <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="7.236ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 3198.3 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(389,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mo" transform="translate(961,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(1405.7,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1895.7,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(2340.3,0)"><path data-c="1D703" d="M35 200Q35 302 74 415T180 610T319 704Q320 704 327 704T339 705Q393 701 423 656Q462 596 462 495Q462 380 417 261T302 66T168 -10H161Q125 -10 99 10T60 63T41 130T35 200ZM383 566Q383 668 330 668Q294 668 260 623T204 521T170 421T157 371Q206 370 254 370L351 371Q352 372 359 404T375 484T383 566ZM113 132Q113 26 166 26Q181 26 198 36T239 74T287 161T335 307L340 324H145Q145 321 136 286T120 208T113 132Z"></path></g><g data-mml-node="mo" transform="translate(2809.3,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container> to retain the state that conforms to the kinematic constraints in equation (7) as the search point, compared with the A</em> algorithm only for the <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.294ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 572 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g></svg></mjx-container> and <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.464ex;" xmlns="http://www.w3.org/2000/svg" width="1.109ex" height="1.464ex" role="img" focusable="false" viewBox="0 -442 490 647"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container>    direction search, the search node of the improved algorithm will be more in line with the kinematic constraints of the vehicle and smoother, the specific node expansion comparison chart is shown in Figure 5. Due to the different ways of node expansion, improving the heuristic function of the A<em> algorithm also needs to be modified in the heuristic function formula (1) of the traditional </em> algorithm. While the traditional A<em> algorithm heuristic function uses the cost of movement between lattices, the improved A</em> algorithm replaces  <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.896ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2164 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D43A" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q492 659 471 656T418 643T357 615T294 567T236 496T189 394T158 260Q156 242 156 221Q156 173 170 136T206 79T256 45T308 28T353 24Q407 24 452 47T514 106Q517 114 529 161T541 214Q541 222 528 224T468 227H431Q425 233 425 235T427 254Q431 267 437 273H454Q494 271 594 271Q634 271 659 271T695 272T707 272Q721 272 721 263Q721 261 719 249Q714 230 709 228Q706 227 694 227Q674 227 653 224Q646 221 643 215T629 164Q620 131 614 108Q589 6 586 3Q584 1 581 1Q571 1 553 21T530 52Q530 53 528 52T522 47Q448 -22 322 -22Q201 -22 126 55T50 252Z"></path></g><g data-mml-node="mo" transform="translate(786,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1175,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1775,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container> with a kinematically constrained path length from the starting point to the node <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.357ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 600 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container>.</p>
+<p>In addition, in the traditional A<em> algorithm, for the simplicity of the algorithm, the robot is usually idealized as a particle without volume, and the path planned under this idealization premise is usually attached to the obstacle, and there will be certain safety risks, especially when passing between the obstacles of the two oblique streets, because the robot has its own volume, the robot has a high probability of colliding with the obstacle, resulting in the inability to travel or even the robot damage. In order to solve this problem, the improved A</em> algorithm rasterizes and expands all obstacles, expands with the approximate radius of the robot, and then treats the robot as a particle for path planning algorithm processing, which can effectively reduce the risk of obstacle collision while retaining the simplicity and applicability of the algorithm to the greatest extent.</p>
+<img src="/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure5.png" class="">
+<center>Figure 5. Node expansion comparison chart for traditional A*(left) and improved A*(right)</center>
+
+<p><br></p>
+<h2 id="3-Experimental-testing-and-analysis"><a href="#3-Experimental-testing-and-analysis" class="headerlink" title="3.Experimental testing and analysis"></a>3.Experimental testing and analysis</h2><p>The path planning method proposed in this topic will be simulated and tested with the help of the Gazebo simulation platform; the Gazebo platform is highly compatible with ROS and supports the DART dynamic physics engine, which can highly simulate indoor and outdoor environments. In addition, Gazebo also supports the simulation of sensors. This article will design two simulation maps dedicated to testing, and use a four-wheel mobile car as the execution body of the path planning task.</p>
+<img src="/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure6.png" class="">
+<center>Figure 6. Gazebo path planning test scenario with simulation trolley</center>
+
+<p><br></p>
+<p>In order to reflect the comparison and improvement of the improved A<em> algorithm to the traditional A</em> algorithm, this paper designs two maps with different degrees of difficulty. Figure 6(a) is a simple map, and Figure 6(b) is a complex map. The complex map restores author’s family building structure. In order to avoid the contingency of a single planning result, this paper tests the planning paths of traditional A<em> and improved A</em> under multiple different end points in simple maps and complex maps, and the time required for the robot to reach the end point from the starting point in the simulation. Under the premise of the same destination and using the same controller, the smoother and more efficient the path, the easier the mobile robot will follow and the less time it will take to reach the destination.</p>
+<img src="/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure7.png" class="">
+<center>Figure 7. Comparison of simple scene path planning results</center>
+
+<p><br></p>
+<p>The comparison of planned paths between the traditional A<em> algorithm and the improved A</em> algorithm under a simple map is shown in Figure 7; the comparison of planned paths under a complex map is shown in Figure 8; the time-consuming summary of each planned path tracking is shown in Table 1. In Figures 7 and 8, the white rectangle represents the robot (at the starting position), the red arrow is the target point, and the green route is the trajectory; in order to avoid collisions, the maps used by both improved A<em> and traditional A</em> have performed obstacle expansion operations (The inflated part is the blue area).</p>
+<p>It can be seen from the planning path diagram that the path planned by the improved A<em> algorithm is smoother and more continuous than the traditional A</em> algorithm, and at the same time there are few sudden corners (the corners of the route in the figure are when the car moves forward or backward or turns backward. Forward); and the traditional A<em> algorithm, due to its eight-direction search strategy, will generate a kink at the beginning of each turn, resulting in discontinuity of the path at the turn. It can be seen from the path tracking time-consuming graph that when the improved A</em> algorithm plans a path with a similar length to the traditional A<em> algorithm, the path planned by the improved A</em> algorithm is easier to be tracked by the robot, and the tracking time is less; on average , the path tracking time of the improved A<em> algorithm is about half that of the traditional A</em> algorithm, which is mainly due to the fact that the improved A* algorithm takes the kinematic constraints of the car into consideration, and the planned path conforms to the kinematic constraints of the vehicle, so that it is easier to be tracked by the car.</p>
+<p> Table 1. Comparison of the tracing time of the traditional A<em> algorithm and the improved A</em> algorithm planning path</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Easy test 1</th>
+<th>Easy test 2</th>
+<th>Easy test 3</th>
+<th>Complex test 1</th>
+<th>Complex test 1</th>
+<th>Complex test 1</th>
+<th>Complex test 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Traditional A* algorithm</td>
+<td>39.06s</td>
+<td>32.61s</td>
+<td>26.34s</td>
+<td>28.93s</td>
+<td>43.28s</td>
+<td>47.95s</td>
+<td>18.63s</td>
+</tr>
+<tr>
+<td>Improved A* algorithm</td>
+<td>19.82s</td>
+<td>13.21s</td>
+<td>9.86s</td>
+<td>23.12s</td>
+<td>21.59s</td>
+<td>24.63s</td>
+<td>16.47s</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="4-Summary-and-Outlook"><a href="#4-Summary-and-Outlook" class="headerlink" title="4.Summary and Outlook"></a>4.Summary and Outlook</h2><p>This paper proposes an improved path planning algorithm based on the traditional A<em> algorithm. This paper first analyses the defects of the traditional A</em> algorithm, including; the path is not smooth, and the corners are full of broken lines, which makes it difficult for the robot to turn around the corner; and then a new algorithm is proposed. The solution idea: consider the kinematic constraints of the mobile robot when expanding the nodes in path planning, and model the kinematics of the four-wheeled mobile robot to improve the A<em> algorithm; in addition, this paper also introduces obstacle rasterization Expansion processing increases the safety of path planning. In the path planning tests of simulation experiments, no collision case occurred. Finally, multiple experimental results in simple and complex scenes have verified that the improved A</em> algorithm is more effective than the traditional A* algorithm, the planned path is smoother, and it is easier to be tracked by the robot.</p>
+<p>In the future, this study plans to apply the proposed algorithm to a physical mobile robot and conduct a test in a real environment. At present, this research has built a physical mobile robot (see Figure 9), and the follow-up will combine the radar/camera sensor installed on the mobile robot Complete real-time environment modelling and path planning tasks together.</p>
+<img src="/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure8.png" class="">
+<center>Figure 8. Comparison of path planning results for complex scenarios.</center>
+
+<p><br></p>
+<img src="/2023/04/07/Research-on-path-planning-problem-of-smart-car-considering-kinematic-constraints/figure9.png" class="">
+<center>Figure 9. Controllable physical four-wheeled trolley.</center>
+
+<p><br></p>
+<h2 id="5-References"><a href="#5-References" class="headerlink" title="5.References"></a>5.References</h2><p>[1]    Xiaojian Lv. Research on path planning technology of vehicle navigation system. Master’s thesis, Shanghai Jiaotong University, 2011.</p>
+<p>[2]    Yarong Shi, Di Wan, Shuangyan Li, Zhenyu Lv. Research on logistics distribution route planning based on GIS. Systems Engineering-Theory &amp; Practice, 29(10):76–84, 2009.</p>
+<p>[3]    Yi Jian, Bin Gao, Yue Zhang. Research on a full-traversal path planning method for indoor sweeping robot. Transducers and Microsystems, 37(1):32–34, 2018.</p>
+<p>[4]    Qi Song, Yinghui Wu, Peng Lin, Luna Xin Dong, and Hui Sun. Mining summaries for knowledge graph search. IEEE Transactions on Knowledge and Data Engineering, 30(10):1887–1900, 2018.</p>
+<p>[5]    Huijuan Wang, Yuan Yu, and Quanbo Yuan. Application of dijkstra algorithm in robot path-planning. In 2011 second international conference on mechanic automation and control engineering, pages 1067–1069. IEEE, 2011.</p>
+<p>[6]    František Duchoň, Andrej Babinec, Martin Kajan, Peter Beňo, Martin Florek, Tomáš Fico, and Ladislav Jurišica. Path planning with modified a star algorithm for a mobile robot. Procedia Engineering, 96:59–69, 2014.</p>
+<p>[7]    David Hsu, Jean-Claude Latombe, and Hanna Kurniawati. On the probabilistic foundations of probabilistic roadmap planning. The International Journal of Robotics Research, 25(7):627–643, 2006.</p>
+<p>[8]    Steven M LaValle and James J Kuffner. Rapidly-exploring random trees: Progress and prospects: Steven m. lavalle, iowa state university, a james j. kuffner, jr., university of tokyo, tokyo, japan. Algorithmic and Computational Robotics, pages 303–307, 2001.</p>
+<p>[9]    Anis Koubâa et al. Robot Operating System (ROS)., volume 1. Springer, 2017.</p>
+<p>[10]    Nathan Koenig and Andrew Howard. Design and use paradigms for gazebo, an open-source multi-robot simulator. In 2004 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) (IEEE Cat. No. 04CH37566), volume 3, pages 2149–2154. IEEE, 2004.</p>
+<p>[11]    Deepak Sinwar and Rahul Kaushik. Study of euclidean and manhattan distance metrics using simple k-means clustering. Int. J. Res. Appl. Sci. Eng. Technol, 2(5):270–274, 2014.</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/04/07/Videos/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          Videos
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2023 Zhanhong Liu
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
