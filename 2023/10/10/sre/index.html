@@ -80,7 +80,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">4.2k</span>
+            <span class="post-count">4.3k</span>
         </span>
     </span>
 
@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">25 min</span>
+            <span class="post-count">26 min</span>
         </span>
     </span>
 </div>
@@ -104,7 +104,18 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p><strong>Abstract</strong>. With the development of artificial intelligence, intelligent cars have gradually appeared in people’s lives and brought many conveniences to people’s lives and work. On the street, we can see many busy figures of unmanned delivery cars; In some factories, smart cars shuttle back and forth between product production processes for material distribution; In some hospitals, we can also find that some smart cars replace medical staff to undertake the task of sending medicines and tests. For intelligent cars, autonomous collision-free path planning and trajectory tracking of the planned path are the most basic and core tasks of intelligent vehicles. The existing path planning algorithms are mainly divided into search-based algorithms (Dijkstra, A*, etc.) and sample-based algorithms (PRM, RRT, etc.), and different types of algorithms have good performance in their respective applicable scenarios. However, these path planning algorithms all use the same simplification assumption, that is, the intelligent car is regarded as a freely moving point or sphere in the path planning task, and the driving experience in life tells us that the movement of the wheel-driven intelligent car is constrained by the turning radius of the vehicle, so the path planned by the simplified intelligent car for a point is often not suitable for the driving of the intelligent car in reality. Considering this constraint, this project models the kinematics of the intelligent trolley with four-wheel steering, and adds kinematic constraints to the path planning, so as to plan the path that conforms to the kinematics model of the intelligent trolley. The path planning algorithm proposed in this topic will be tested in ROS and Gazebo simulation environments, and compared with the traditional search-based A* algorithm, the results of multiple scenarios verify the effectiveness of the algorithm. Finally, this project summarizes and looks forward to this research, which has completed the construction of low-cost physical intelligent vehicles, and plans to complete the verification of the real vehicle function by combining the designed path planning algorithm with the real-time mapping and positioning system of the car in the future.</p>
+  <p><strong>Project Videos</strong></p>
+<p>I have just started getting my resources and explaining all the details about my experiment and what i am planning to do next on my experiment. Enjoy as i go along my journey of this intelligent car experiment.</p>
+<p><a target="_blank" rel="noopener" href="https://youtu.be/erTVvAtJNuE">Video1</a></p>
+<p>So this is part 2 of my intelligent car experiment, and i talk about the weaknesses of the previous A* algorithm and express how i will be improving this algorithm.</p>
+<p><a target="_blank" rel="noopener" href="https://youtu.be/Z-eEs2ctTmY">Video2</a></p>
+<p>This is part 3 of my intelligent car experiment, here i test the algorithms and the maths needed to make the robot run.</p>
+<p><a target="_blank" rel="noopener" href="https://youtu.be/apOxM7dExcM">Video3</a></p>
+<p>This is part 4 of the intelligent car experiment. Here I explain the mathematical section of this experiment. The improved algorithm here is displayed with all the nessecary elements to start testing this Gazebo.</p>
+<p><a target="_blank" rel="noopener" href="https://youtu.be/VLJSFQums80">Video4</a></p>
+<p>This is part 5 of the intellignet car experiment. I have tried testing both the the improved and normal A star algorithm in the gazebo software. Major improvements have been shown.</p>
+<p><a target="_blank" rel="noopener" href="https://youtu.be/j9tchbj_rPI">Video5</a></p>
+<p><strong>Abstract</strong>. With the development of artificial intelligence, intelligent cars have gradually appeared in people’s lives and brought many conveniences to people’s lives and work. On the street, we can see many busy figures of unmanned delivery cars; In some factories, smart cars shuttle back and forth between product production processes for material distribution; In some hospitals, we can also find that some smart cars replace medical staff to undertake the task of sending medicines and tests. For intelligent cars, autonomous collision-free path planning and trajectory tracking of the planned path are the most basic and core tasks of intelligent vehicles. The existing path planning algorithms are mainly divided into search-based algorithms (Dijkstra, A*, etc.) and sample-based algorithms (PRM, RRT, etc.), and different types of algorithms have good performance in their respective applicable scenarios. However, these path planning algorithms all use the same simplification assumption, that is, the intelligent car is regarded as a freely moving point or sphere in the path planning task, and the driving experience in life tells us that the movement of the wheel-driven intelligent car is constrained by the turning radius of the vehicle, so the path planned by the simplified intelligent car for a point is often not suitable for the driving of the intelligent car in reality. Considering this constraint, this project models the kinematics of the intelligent trolley with four-wheel steering, and adds kinematic constraints to the path planning, so as to plan the path that conforms to the kinematics model of the intelligent trolley. The path planning algorithm proposed in this topic will be tested in ROS and Gazebo simulation environments, and compared with the traditional search-based A* algorithm, the results of multiple scenarios verify the effectiveness of the algorithm. Finally, this project summarizes and looks forward to this research, which has completed the construction of low-cost physical intelligent vehicles, and plans to complete the verification of the real vehicle function by combining the designed path planning algorithm with the real-time mapping and positioning system of the car in the future.</p>
 <p><strong>Keywords</strong>-Intelligent trolley, Path planning, Kinematic constraints</p>
 <h3 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h3><p>The intelligent car is an unmanned car equipped with sensors that can perceive the environment, interact with the environment, plan sports independently, avoid collisions and avoid obstacles. Due to its high degree of intelligence, intelligent cars can bring many conveniences to people’s lives. At the moment of the epidemic, human transportation is extremely tight, and many takeaway delivery and express logistics staff are sick and unable to quickly deliver the required items to families and companies in need. In this environment, smart cars have great use, such as Meituan’s unmanned delivery car (see Figure 1(a)), which can quickly find the optimal delivery route according to the preset map and real-time road conditions, and give the required items to those people. In addition, such trolleys can be mass-produced and do not require a break, which can continue to serve couriers. The popularity of smart cars can also reduce the number of people-to-person encounters, thus reducing the risk of virus transmission. Smart cars can also replace human patrols in cities and replace police patrols with video recordings (see Figure 1(b)), providing more evidence to maintain social order and punish those who break the law. In addition to being popularized and applied in cities, smart cars can also be applied to rural agriculture after receiving certain mechanical transformation (see Figure 1(c) Plant Protection Agricultural Machinery). During the rice harvest season, farmers must harvest the rice before the rainy day, but they also need plenty of rest and no outside influence that causes farmers to stop working. In this way, farmers will not only be overworked, but the efficiency of rice harvesting will also be low. But with the help of smart cars, the work that would have taken several days can be done by robots in a day, saving a lot of manpower and time. In the industrial sector, people still rely heavily on mineral resources such as coal and oil, but there are also certain dangers in mining such mines. A sudden collapse can lead to many unimaginable consequences, but with the help of unmanned exploration vehicles (see Figure 1(d)), the structure and shape of the mine cave can be detected in advance, and the mining plan can be set in advance, reducing the risk of surveyors being killed.</p>
 <p><img src="/2023/10/10/sre/f1.png" alt="Figure 1. A series of applications of intelligent trolleys: (a) Meituan unmanned delivery trolley, (b) unmanned patrol police vehicle, (c) unmanned agricultural machinery, (d) unmanned detection mining vehicle."></p>
@@ -188,11 +199,6 @@
 <p>[9]	Anis Koubâa et al. Robot Operating System (ROS)., volume 1. Springer, 2017.</p>
 <p>[10]	Nathan Koenig and Andrew Howard. Design and use paradigms for gazebo, an open-source multi-robot simulator. In 2004 IEEE&#x2F;RSJ International Conference on Intelligent Robots and Systems (IROS) (IEEE Cat. No. 04CH37566), volume 3, pages 2149–2154. IEEE, 2004.</p>
 <p>[11]	Deepak Sinwar and Rahul Kaushik. Study of euclidean and manhattan distance metrics using simple k-means clustering. Int. J. Res. Appl. Sci. Eng. Technol, 2(5):270–274, 2014.</p>
-<p><a target="_blank" rel="noopener" href="https://youtu.be/erTVvAtJNuE">https://youtu.be/erTVvAtJNuE</a></p>
-<p><a target="_blank" rel="noopener" href="https://youtu.be/Z-eEs2ctTmY">https://youtu.be/Z-eEs2ctTmY</a></p>
-<p><a target="_blank" rel="noopener" href="https://youtu.be/apOxM7dExcM">https://youtu.be/apOxM7dExcM</a></p>
-<p><a target="_blank" rel="noopener" href="https://youtu.be/VLJSFQums80">https://youtu.be/VLJSFQums80</a></p>
-<p><a target="_blank" rel="noopener" href="https://youtu.be/j9tchbj_rPI">https://youtu.be/j9tchbj_rPI</a></p>
 <p><img src="/2023/10/10/sre/letter.png" alt="acceptance letter"></p>
  
       <!-- reward -->
@@ -243,39 +249,7 @@
 </article>
 
 </section>
-      <footer class="footer">
-  <div class="outer">
-    <ul>
-      <li>
-        Copyrights &copy;
-        2023
-        <i class="ri-heart-fill heart_icon"></i> Jeff Liu
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-      </li>
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      <li>
-        <!-- cnzz统计 -->
-        
-      </li>
-    </ul>
-  </div>
-</footer>    
+          
     </main>
     <div class="float_btns">
       <div class="totop" id="totop">
@@ -306,6 +280,10 @@
     </li>
     
     <li class="nav-item">
+      <a class="nav-item-link" href="/tags/life">COMMUNITY AND VOLUNTEER</a>
+    </li>
+    
+    <li class="nav-item">
       <a class="nav-item-link" href="/tags/Academics">ACADEMICS</a>
     </li>
     
@@ -315,10 +293,6 @@
     
     <li class="nav-item">
       <a class="nav-item-link" href="/tags/sport">SPORTS</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/tags/life">COMMUNITY AND VOLUNTEER</a>
     </li>
     
     <li class="nav-item">
